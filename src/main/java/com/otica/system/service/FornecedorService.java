@@ -1,10 +1,12 @@
 package com.otica.system.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.otica.system.model.Fornecedor;
 import com.otica.system.repository.FornecedorRepository;
 
+@Service
 public class FornecedorService {
 
 	@Autowired
