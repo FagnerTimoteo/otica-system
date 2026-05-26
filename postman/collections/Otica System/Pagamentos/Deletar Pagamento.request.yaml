@@ -1,0 +1,11 @@
+$kind: http-request
+name: Deletar Pagamento
+method: DELETE
+url: '{{baseUrl}}/pagamentos/{{pagamentoId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });

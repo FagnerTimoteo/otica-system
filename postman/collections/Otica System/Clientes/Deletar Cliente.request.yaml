@@ -1,0 +1,11 @@
+$kind: http-request
+name: Deletar Cliente
+method: DELETE
+url: '{{baseUrl}}/clientes/{{clienteId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });

@@ -1,0 +1,20 @@
+$kind: collection
+name: Otica System
+description: Collection of API requests for the Otica System - an optical store management system.
+variables:
+  - key: baseUrl
+    value: 'http://localhost:3000'
+  - key: clienteId
+    value: ''
+  - key: fornecedorId
+    value: ''
+  - key: produtoId
+    value: ''
+  - key: pedidoId
+    value: ''
+  - key: pagamentoId
+    value: ''
+  - key: receitaId
+    value: ''
+  - key: usuarioId
+    value: ''

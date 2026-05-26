@@ -1,0 +1,36 @@
+$kind: http-request
+name: Buscar Receita por ID
+method: GET
+url: '{{baseUrl}}/receitas/{{receitaId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test("Response has id", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("id");
+        pm.expect(json.id).to.be.a("number");
+      });
+
+      pm.test("Response has esferaOD", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("esferaOD");
+      });
+
+      pm.test("Response has esferaOE", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("esferaOE");
+      });
+
+      pm.test("Response has distanciaPupilar", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("distanciaPupilar");
+      });

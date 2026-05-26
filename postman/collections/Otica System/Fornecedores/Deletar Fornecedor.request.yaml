@@ -1,0 +1,11 @@
+$kind: http-request
+name: Deletar Fornecedor
+method: DELETE
+url: '{{baseUrl}}/fornecedores/{{fornecedorId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });

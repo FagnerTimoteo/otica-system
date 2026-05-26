@@ -1,0 +1,53 @@
+$kind: http-request
+name: Criar Pagamento
+method: POST
+url: "{{baseUrl}}/pagamentos"
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "tipo": "CARTAO",
+      "valor": 599.90,
+      "dataPagamento": "2024-01-15",
+      "status": "PAGO"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test("Response has id", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("id");
+        pm.expect(json.id).to.be.a("number");
+      });
+
+      pm.test("Response has tipo", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("tipo");
+        pm.expect(json.tipo).to.be.a("string");
+      });
+
+      pm.test("Response has valor", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("valor");
+      });
+
+      pm.test("Response has status", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("status");
+      });
+
+      const json = pm.response.json();
+      if (json && json.id) {
+        pm.collectionVariables.set("pagamentoId", json.id);
+      }
+    language: text/javascript

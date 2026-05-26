@@ -1,0 +1,11 @@
+$kind: http-request
+name: Deletar Usuario
+method: DELETE
+url: '{{baseUrl}}/usuarios/{{usuarioId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });

@@ -1,0 +1,43 @@
+$kind: http-request
+name: Buscar Usuario por ID
+method: GET
+url: '{{baseUrl}}/usuarios/{{usuarioId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test("Response has id", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("id");
+        pm.expect(json.id).to.be.a("number");
+      });
+
+      pm.test("Response has nome", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("nome");
+        pm.expect(json.nome).to.be.a("string");
+      });
+
+      pm.test("Response has email", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("email");
+        pm.expect(json.email).to.be.a("string");
+      });
+
+      pm.test("Response has role", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("role");
+      });
+
+      pm.test("Response has ativo", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("ativo");
+      });

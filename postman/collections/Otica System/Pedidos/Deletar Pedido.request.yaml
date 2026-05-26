@@ -1,0 +1,11 @@
+$kind: http-request
+name: Deletar Pedido
+method: DELETE
+url: '{{baseUrl}}/pedidos/{{pedidoId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });

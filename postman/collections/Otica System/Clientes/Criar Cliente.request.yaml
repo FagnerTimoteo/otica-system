@@ -1,0 +1,50 @@
+$kind: http-request
+name: Criar Cliente
+method: POST
+url: '{{baseUrl}}/clientes'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nome": "João Silva",
+      "cpf": "123.456.789-00",
+      "telefone": "(11) 99999-0001",
+      "email": "joao.silva@email.com",
+      "dataCadastro": "2024-01-15T10:00:00"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test("Response has id", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("id");
+        pm.expect(json.id).to.be.a("number");
+      });
+
+      pm.test("Response has nome", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("nome");
+        pm.expect(json.nome).to.be.a("string");
+      });
+
+      pm.test("Response has cpf", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("cpf");
+      });
+
+      const json = pm.response.json();
+      if (json && json.id) {
+        pm.collectionVariables.set("clienteId", json.id);
+      }

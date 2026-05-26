@@ -1,0 +1,11 @@
+$kind: http-request
+name: Deletar Produto
+method: DELETE
+url: '{{baseUrl}}/produtos/{{produtoId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });

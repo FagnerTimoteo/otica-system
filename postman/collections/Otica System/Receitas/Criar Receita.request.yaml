@@ -1,0 +1,58 @@
+$kind: http-request
+name: Criar Receita
+method: POST
+url: '{{baseUrl}}/receitas'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "esferaOD": -2.5,
+      "cilindroOD": -0.75,
+      "eixoOD": 180,
+      "esferaOE": -2.0,
+      "cilindroOE": -0.50,
+      "eixoOE": 175,
+      "distanciaPupilar": 62.0,
+      "observacoes": "Uso contínuo",
+      "dataReceita": "2024-01-15T10:00:00"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is JSON", function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test("Response has id", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("id");
+        pm.expect(json.id).to.be.a("number");
+      });
+
+      pm.test("Response has esferaOD", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("esferaOD");
+      });
+
+      pm.test("Response has esferaOE", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("esferaOE");
+      });
+
+      pm.test("Response has distanciaPupilar", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("distanciaPupilar");
+      });
+
+      const json = pm.response.json();
+      if (json && json.id) {
+        pm.collectionVariables.set("receitaId", json.id);
+      }
