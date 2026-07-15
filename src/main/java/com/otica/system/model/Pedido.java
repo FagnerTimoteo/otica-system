@@ -49,4 +49,6 @@ public class Pedido {
 
     @OneToOne(mappedBy = "pedido")
     private Pagamento pagamento;
+    
+    private BigDecimal total;
 }

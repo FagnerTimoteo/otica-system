@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.otica.system.model.Pedido;
@@ -26,6 +27,7 @@ public class PedidoController {
 		return service.save(pedido);
 	}
 	
+	
 	@GetMapping("/{id}")
 	public Pedido findById(@PathVariable Long id) {
 		return service.findById(id);
@@ -35,4 +37,18 @@ public class PedidoController {
 	public void deletar(@PathVariable Long id) {
 		service.deleteById(id);
 	}
+	
+	@PostMapping("/pedido")
+	public Pedido adicionarItem(
+			@PathVariable Long PedidoId,
+			@RequestParam Long produtoId,
+			@RequestParam Integer quantidade) {
+		return service.adicionarItem(PedidoId, produtoId, quantidade);
+	}
+	
+	
+	//*{
+	//  "produtoId": 10
+	//  "quantidade": 2
+	//}
 }
