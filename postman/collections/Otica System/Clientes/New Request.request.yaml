@@ -1,0 +1,5 @@
+$kind: http-request
+name: New Request
+url: "{{baseUrl}}/clientes/{{clienteId}}"
+method: PUT
+order: 1287144414904319
