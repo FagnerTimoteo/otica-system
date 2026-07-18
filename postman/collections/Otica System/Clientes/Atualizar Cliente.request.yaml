@@ -1,0 +1,20 @@
+$kind: http-request
+name: Atualizar Cliente
+url: "{{baseUrl}}/clientes/{{clienteId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Carlos Pedro\",\r
+
+    \  \"cpf\": \"123.456.789-18\",\r
+
+    \  \"telefone\": \"(11) 88888-0001\",\r
+
+    \  \"email\": \"joao.pedro@email.com\",\r
+
+    \  \"dataCadastro\": \"2024-02-15T10:00:00\"\r
+
+    }"
+order: 1287144414904319

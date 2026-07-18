@@ -37,7 +37,6 @@ public class ClienteController {
 		return service.updateById(id, cliente);
 	}
 	
-	
 	@DeleteMapping("/{id}")
 	public void deletar(@PathVariable Long id) {
 		service.deleteById(id);

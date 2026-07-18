@@ -1,0 +1,16 @@
+$kind: http-request
+name: Atualizar Fornecedor
+url: "{{baseUrl}}/fornecedores/{{fornecedorId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Ótica Distribuidora Ltda\",\r
+
+    \  \"telefone\": \"(11) 3333-4444\",\r
+
+    \  \"email\": \"contato@distribuidora.com\"\r
+
+    }"
+order: 1605685945040895

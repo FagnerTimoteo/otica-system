@@ -24,4 +24,16 @@ public class FornecedorService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	public Fornecedor updateById(Long id, Fornecedor fornecedor) {
+		return repository.findById(id).map( fornecedorExistente -> {
+			fornecedorExistente.setNome(fornecedor.getNome());
+			fornecedorExistente.setTelefone(fornecedor.getTelefone());
+			fornecedorExistente.setEmail(fornecedor.getEmail());
+			//fornecedorExistente.setProdutos(null);
+			
+			return repository.save(fornecedorExistente);
+		}).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+	}
 }
