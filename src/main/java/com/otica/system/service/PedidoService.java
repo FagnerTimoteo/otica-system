@@ -76,4 +76,23 @@ public class PedidoService {
 		
 		pedido.setTotal(total);
 	}
+
+	public Pedido updateById(Long id, Pedido pedido) {
+		return pedidoRepository.findById(id).map( pedidoExistente -> {
+			//pedidoExistente.setCliente(null);
+			//pedidoExistente.setFuncionario(null);
+			pedidoExistente.setDataPedido(pedido.getDataPedido());
+			pedidoExistente.setStatus(pedido.getStatus());
+			pedidoExistente.setPreco(pedido.getPreco());
+			pedidoExistente.setReceita(pedido.getReceita());
+			//pedidoExistente.setItens(null);
+			//pedidoExistente.setPagamento(null);
+			pedidoExistente.setTotal(pedido.getTotal());
+			
+			return pedidoRepository.save(pedidoExistente);
+		}).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+	}
 }
+
+
+
