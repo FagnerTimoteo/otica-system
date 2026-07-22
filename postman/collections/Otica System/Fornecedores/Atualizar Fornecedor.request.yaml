@@ -6,11 +6,11 @@ body:
   type: json
   content: "{\r
 
-    \  \"nome\": \"Ótica Distribuidora Ltda\",\r
+    \  \"nome\": \"Ótica Lais Ltda\",\r
 
-    \  \"telefone\": \"(11) 3333-4444\",\r
+    \  \"telefone\": \"(11) 2222-4444\",\r
 
-    \  \"email\": \"contato@distribuidora.com\"\r
+    \  \"email\": \"fornecedor@distribuidora.com\"\r
 
     }"
 order: 1605685945040895

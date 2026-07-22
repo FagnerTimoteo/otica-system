@@ -24,6 +24,18 @@ public class PagamentoService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	public Pagamento updateById(Long id, Pagamento pagamento) {
+		return repository.findById(id).map ( pagamentoExistente -> {
+			//pagamentoExistente.setPedido(null);
+			pagamentoExistente.setTipo(pagamento.getTipo());
+			pagamentoExistente.setValor(pagamento.getValor());
+			pagamentoExistente.setDataPagamento(pagamento.getDataPagamento());
+			//pagamentoExistente.setStatus(null);
+			
+			return repository.save(pagamentoExistente);
+		}).orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
+	}
 }
 
 

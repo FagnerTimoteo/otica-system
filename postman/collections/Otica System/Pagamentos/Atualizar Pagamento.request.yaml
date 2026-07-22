@@ -1,0 +1,18 @@
+$kind: http-request
+name: Atualizar Pagamento
+url: "{{baseUrl}}/pagamentos/{{pagamentoId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"tipo\": \"PIX\",\r
+
+    \  \"valor\": 79.90,\r
+
+    \  \"dataPagamento\": \"2024-01-15\",\r
+
+    \  \"status\": \"PAGO\"\r
+
+    }"
+order: 2609510571048959

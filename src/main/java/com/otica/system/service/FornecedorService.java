@@ -33,7 +33,7 @@ public class FornecedorService {
 			//fornecedorExistente.setProdutos(null);
 			
 			return repository.save(fornecedorExistente);
-		}).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+		}).orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
 
 	}
 }
