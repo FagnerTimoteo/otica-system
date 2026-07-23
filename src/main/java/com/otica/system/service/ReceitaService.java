@@ -24,4 +24,21 @@ public class ReceitaService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	public Receita updateById(Long id, Receita receita) {
+		return repository.findById(id).map( receitaExistente -> {
+			//receitaExistente.setCliente(null);
+			receitaExistente.setEsferaOD(receita.getEsferaOD());
+			receitaExistente.setCilindroOD(receita.getCilindroOD());
+			receitaExistente.setEixoOD(receita.getEixoOD());
+			receitaExistente.setEsferaOE(receita.getEsferaOE());
+			receitaExistente.setCilindroOE(receita.getCilindroOE());
+			receitaExistente.setEixoOE(receita.getEixoOE());
+			receitaExistente.setDistanciaPupilar(receita.getDistanciaPupilar());
+			receitaExistente.setObservacoes(receita.getObservacoes());
+			receitaExistente.setDataReceita(receita.getDataReceita());
+			
+			return repository.save(receitaExistente);
+		}).orElseThrow(() -> new RuntimeException("Receita não encontrada"));
+	}
 }

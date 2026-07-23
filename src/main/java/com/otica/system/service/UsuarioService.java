@@ -24,4 +24,17 @@ public class UsuarioService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	public Usuario updateById(Long id, Usuario usuario) {
+		return repository.findById(id).map( usuarioExistente -> {
+			usuarioExistente.setNome(usuario.getNome());
+			usuarioExistente.setEmail(usuario.getEmail());
+			usuarioExistente.setSenha(usuario.getSenha());
+			usuarioExistente.setRole(usuario.getRole());
+			usuarioExistente.setAtivo(usuario.getAtivo());
+			//usuarioExistente.setPedidos(null);
+			
+			return repository.save(usuarioExistente);
+		}).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+	}
 }

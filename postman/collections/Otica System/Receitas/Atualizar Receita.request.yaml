@@ -1,0 +1,28 @@
+$kind: http-request
+name: Atualizar Receita
+url: "{{baseUrl}}/receitas/{{receitaId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"esferaOD\": -2.0,\r
+
+    \  \"cilindroOD\": -0.5,\r
+
+    \  \"eixoOD\": 90,\r
+
+    \  \"esferaOE\": -1.0,\r
+
+    \  \"cilindroOE\": -1.50,\r
+
+    \  \"eixoOE\": 180,\r
+
+    \  \"distanciaPupilar\": 70.0,\r
+
+    \  \"observacoes\": \"Uso moderado\",\r
+
+    \  \"dataReceita\": \"2024-01-15T10:00:00\"\r
+
+    }"
+order: 989637653823487
