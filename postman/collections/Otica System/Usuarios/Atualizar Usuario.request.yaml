@@ -1,0 +1,20 @@
+$kind: http-request
+name: Atualizar Usuario
+url: "{{baseUrl}}/usuarios/{{usuarioId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Antonio\",\r
+
+    \  \"email\": \"antonio@otica.com\",\r
+
+    \  \"senha\": \"senha1233\",\r
+
+    \  \"role\": \"VENDEDOR\",\r
+
+    \  \"ativo\": false\r
+
+    }"
+order: 1476651957354495

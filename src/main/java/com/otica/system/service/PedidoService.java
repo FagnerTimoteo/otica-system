@@ -1,7 +1,9 @@
 package com.otica.system.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import com.otica.system.model.StatusPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,10 @@ public class PedidoService {
     private ProdutoRepository produtoRepository;
 	
 	public Pedido save(Pedido pedido) {
+		pedido.setDataPedido(LocalDateTime.now());
+		pedido.setStatus(StatusPedido.ABERTO);
+		pedido.setValorTotal(BigDecimal.ZERO);
+
 		return pedidoRepository.save(pedido);
 	}
 	
@@ -43,13 +49,17 @@ public class PedidoService {
             Integer quantidade) {
 		
 		Pedido pedido = pedidoRepository.findById(pedidoId)
-				.orElseThrow(() -> new RuntimeException(""));
+				.orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 		
 		Produto produto = produtoRepository.findById(produtoId)
-				.orElseThrow(() -> new RuntimeException(""));
+				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+		if(quantidade == null || quantidade <= 0) {
+			throw new RuntimeException("A quantidade deve ser maior que zero");
+		}
 		
 		if(produto.getQuantidadeEstoque() < quantidade) {
-			throw new RuntimeException("");
+			throw new RuntimeException("Estoque insuficiente");
 		}
 		
 		ItemPedido item = new ItemPedido();
@@ -63,18 +73,22 @@ public class PedidoService {
 		
 		recalcularTotal(pedido);
 		
-		return pedido;
+		return pedidoRepository.save(pedido);
 	}
 
 	private void recalcularTotal(Pedido pedido) {
-		
+
 		BigDecimal total = pedido.getItens()
-			.stream().map(item -> 
-					item.getPrecoUnitario()
-						.multiply(BigDecimal.valueOf(item.getQuantidade())))
-			.reduce(BigDecimal.ZERO, BigDecimal::add);
-		
-		pedido.setTotal(total);
+			.stream()
+			.map(item -> item.getPrecoUnitario()
+				.multiply(
+					BigDecimal.valueOf(
+						item.getQuantidade()
+					)
+				)
+			).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+		pedido.setValorTotal(total);
 	}
 
 	public Pedido updateById(Long id, Pedido pedido) {
@@ -83,16 +97,12 @@ public class PedidoService {
 			//pedidoExistente.setFuncionario(null);
 			pedidoExistente.setDataPedido(pedido.getDataPedido());
 			pedidoExistente.setStatus(pedido.getStatus());
-			pedidoExistente.setPreco(pedido.getPreco());
 			pedidoExistente.setReceita(pedido.getReceita());
 			//pedidoExistente.setItens(null);
 			//pedidoExistente.setPagamento(null);
-			pedidoExistente.setTotal(pedido.getTotal());
+			pedidoExistente.setValorTotal(pedido.getValorTotal());
 			
 			return pedidoRepository.save(pedidoExistente);
 		}).orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 	}
 }
-
-
-

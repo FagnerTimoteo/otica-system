@@ -43,17 +43,12 @@ public class PedidoController {
 		service.deleteById(id);
 	}
 	
-	@PostMapping("/pedido")
+	@PostMapping("/{pedidoId}/itens")
 	public Pedido adicionarItem(
-			@PathVariable Long PedidoId,
+			@PathVariable Long pedidoId,
 			@RequestParam Long produtoId,
 			@RequestParam Integer quantidade) {
-		return service.adicionarItem(PedidoId, produtoId, quantidade);
+
+		return service.adicionarItem(pedidoId, produtoId, quantidade);
 	}
-	
-	
-	//*{
-	//  "produtoId": 10
-	//  "quantidade": 2
-	//}
 }
