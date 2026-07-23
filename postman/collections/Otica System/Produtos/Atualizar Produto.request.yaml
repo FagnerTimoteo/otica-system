@@ -1,0 +1,18 @@
+$kind: http-request
+name: Atualizar Produto
+url: "{{baseUrl}}/produtos/{{produtoId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Lentes Ray-Ban\",\r
+
+    \  \"preco\": 9.90,\r
+
+    \  \"quantidadeEstoque\": 1,\r
+
+    \  \"tipo\": \"LENTE\"\r
+
+    }"
+order: 3828408241881087
