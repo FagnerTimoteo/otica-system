@@ -24,4 +24,17 @@ public class ProdutoService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	public Produto updateById(Long id, Produto produto) {
+		return repository.findById(id).map( produtoExistente -> {
+			produtoExistente.setNome(produto.getNome());
+			produtoExistente.setPreco(produto.getPreco());
+			produtoExistente.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+			produtoExistente.setTipo(produto.getTipo());
+			//produtoExistente.setFornecedor(null);
+			//produtoExistente.setItens(null);
+			
+			return repository.save(produtoExistente);
+		}).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+	}
 }

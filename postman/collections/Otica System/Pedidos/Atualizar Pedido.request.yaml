@@ -1,0 +1,16 @@
+$kind: http-request
+name: Atualizar Pedido
+url: "{{baseUrl}}/pedidos/{{pedidoId}}"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"dataPedido\": \"2024-01-15T10:00:00\",\r
+
+    \  \"status\": \"PAGO\",\r
+
+    \  \"preco\": 99.90\r
+
+    }"
+order: 2993651336609791

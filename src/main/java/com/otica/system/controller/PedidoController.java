@@ -28,7 +28,6 @@ public class PedidoController {
 		return service.save(pedido);
 	}
 	
-	
 	@GetMapping("/{id}")
 	public Pedido findById(@PathVariable Long id) {
 		return service.findById(id);
