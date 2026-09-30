@@ -1,5 +1,4 @@
 $kind: http-request
-name: Criar Pedido
 method: POST
 url: "{{baseUrl}}/pedidos"
 headers:
@@ -8,9 +7,9 @@ body:
   type: json
   content: |-
     {
-      "dataPedido": "2024-01-15T10:00:00",
-      "status": "AGUARDANDO_PAGAMENTO",
-      "preco": 599.90
+      "cliente": {
+        "id": 1
+      }
     }
 scripts:
   - type: afterResponse

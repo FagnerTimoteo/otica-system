@@ -2,6 +2,7 @@ package com.otica.system.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +21,12 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;

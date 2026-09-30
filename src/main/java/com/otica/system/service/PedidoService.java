@@ -3,18 +3,20 @@ package com.otica.system.service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.otica.system.model.StatusPedido;
+import com.fasterxml.jackson.datatype.jdk8.WrappedIOException;
+import com.otica.system.model.*;
+import com.otica.system.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.otica.system.model.ItemPedido;
-import com.otica.system.model.Pedido;
-import com.otica.system.model.Produto;
 import com.otica.system.repository.PedidoRepository;
 import com.otica.system.repository.ProdutoRepository;
 
 @Service
 public class PedidoService {
+
+	@Autowired
+	private ClienteRepository clienteRepository;
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
@@ -23,6 +25,10 @@ public class PedidoService {
     private ProdutoRepository produtoRepository;
 	
 	public Pedido save(Pedido pedido) {
+		Cliente cliente = clienteRepository.findById(pedido.getCliente().getId())
+				.orElseThrow(() -> new RuntimeException("Cliente não existe"));
+
+		pedido.setCliente(cliente);
 		pedido.setDataPedido(LocalDateTime.now());
 		pedido.setStatus(StatusPedido.ABERTO);
 		pedido.setValorTotal(BigDecimal.ZERO);
