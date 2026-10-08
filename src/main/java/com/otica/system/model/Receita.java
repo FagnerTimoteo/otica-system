@@ -25,17 +25,14 @@ public class Receita {
 	private Cliente cliente;
 	
 	private Double esferaOD;
-	
-	private Double cilindroOD;
-	
-	private Double eixoOD;
-	
 	private Double esferaOE;
-	
-	private Double cilindroOE;
-	
+
+	private Double eixoOD;
 	private Double eixoOE;
-	
+
+	private Double cilindroOD;
+	private Double cilindroOE;
+
 	private Double distanciaPupilar;
 	
 	private String observacoes;

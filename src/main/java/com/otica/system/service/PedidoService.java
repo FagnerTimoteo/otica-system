@@ -49,10 +49,7 @@ public class PedidoService {
 		return "Salvo";
 	}
 	
-	public Pedido adicionarItem(
-			Long pedidoId,
-            Long produtoId,
-            Integer quantidade) {
+	public Pedido adicionarItem(Long pedidoId, Long produtoId, Integer qtd) {
 		
 		Pedido pedido = pedidoRepository.findById(pedidoId)
 				.orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
@@ -60,11 +57,11 @@ public class PedidoService {
 		Produto produto = produtoRepository.findById(produtoId)
 				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-		if(quantidade == null || quantidade <= 0) {
+		if(qtd == null || qtd <= 0) {
 			throw new RuntimeException("A quantidade deve ser maior que zero");
 		}
 		
-		if(produto.getQuantidadeEstoque() < quantidade) {
+		if(produto.getQuantidadeEstoque() < qtd) {
 			throw new RuntimeException("Estoque insuficiente");
 		}
 		
@@ -72,7 +69,7 @@ public class PedidoService {
 		
 		item.setPedido(pedido);
 		item.setProduto(produto);
-		item.setQuantidade(quantidade);
+		item.setQuantidade(qtd);
 		item.setPrecoUnitario(produto.getPreco());
 		
 		pedido.getItens().add(item);
