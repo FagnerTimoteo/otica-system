@@ -1,5 +1,6 @@
 package com.otica.system.service;
 
+import com.otica.system.DTO.request.FornecedorRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,12 @@ public class FornecedorService {
 	@Autowired
 	private FornecedorRepository repository;
 	
-	public Fornecedor save(Fornecedor fornecedor) {
+	public Fornecedor save(FornecedorRequestDTO dto) {
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setNome(dto.getNome());
+		fornecedor.setEmail(dto.getEmail());
+		fornecedor.setTelefone(dto.getTelefone());
+
 		return repository.save(fornecedor);
 	}
 	

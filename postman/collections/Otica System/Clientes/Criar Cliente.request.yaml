@@ -1,10 +1,8 @@
 $kind: http-request
-name: Criar Cliente
 method: POST
-url: '{{baseUrl}}/clientes'
+url: "{{baseUrl}}/clientes"
 headers:
-  - key: Content-Type
-    value: application/json
+  Content-Type: application/json
 body:
   type: json
   content: |-
@@ -12,12 +10,10 @@ body:
       "nome": "João Silva",
       "cpf": "123.456.789-00",
       "telefone": "(11) 99999-0001",
-      "email": "joao.silva@email.com",
-      "dataCadastro": "2024-01-15T10:00:00"
+      "email": "joao.silva@email.com"
     }
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       pm.test("Status 200 OK", function () {
         pm.response.to.have.status(200);
@@ -48,3 +44,4 @@ scripts:
       if (json && json.id) {
         pm.collectionVariables.set("clienteId", json.id);
       }
+    language: text/javascript

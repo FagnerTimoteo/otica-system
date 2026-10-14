@@ -1,10 +1,13 @@
 package com.otica.system.service;
 
+import com.otica.system.DTO.request.ClienteRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.otica.system.model.Cliente;
 import com.otica.system.repository.ClienteRepository;
+
+import java.time.LocalDateTime;
 
 @Service
 public class ClienteService {
@@ -12,7 +15,15 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repository;
 	
-	public Cliente save(Cliente cliente) {
+	public Cliente save(ClienteRequestDTO dto) {
+
+		Cliente cliente = new Cliente();
+		cliente.setNome(dto.getNome());
+		cliente.setCpf(dto.getCpf());
+		cliente.setEmail(dto.getEmail());
+		cliente.setTelefone(dto.getTelefone());
+		cliente.setDataCadastro(LocalDateTime.now());
+
 		return repository.save(cliente);
 	}
 	

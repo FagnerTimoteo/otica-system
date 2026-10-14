@@ -1,6 +1,7 @@
 package com.otica.system.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class Pagamento {
 	
 	private BigDecimal valor;
 	
-	private Date dataPagamento;
+	private LocalDateTime dataPagamento;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusPagamento status;

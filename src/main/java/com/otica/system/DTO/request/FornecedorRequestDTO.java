@@ -1,5 +1,6 @@
 package com.otica.system.DTO.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ public class FornecedorRequestDTO {
     @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
 
+    @Email
     @NotBlank(message = "Email é obrigatório")
     private String email;
 }

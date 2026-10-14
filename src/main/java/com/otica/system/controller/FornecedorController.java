@@ -1,5 +1,7 @@
 package com.otica.system.controller;
 
+import com.otica.system.DTO.request.FornecedorRequestDTO;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +25,8 @@ public class FornecedorController {
 	}
 	
 	@PostMapping
-	public Fornecedor save(@RequestBody Fornecedor fornecedor) {
-		return service.save(fornecedor);
+	public Fornecedor save(@Valid @RequestBody FornecedorRequestDTO requestDTO) {
+		return service.save(requestDTO);
 	}
 	
 	@GetMapping("/{id}")

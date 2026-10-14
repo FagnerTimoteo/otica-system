@@ -1,5 +1,7 @@
 package com.otica.system.controller;
 
+import com.otica.system.DTO.request.PagamentoRequestDTO;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +25,8 @@ public class PagamentoController {
 	}
 	
 	@PostMapping
-	public Pagamento save(@RequestBody Pagamento pagamento) {
-		return service.save(pagamento);
+	public Pagamento save(@Valid @RequestBody PagamentoRequestDTO requestDTO) {
+		return service.save(requestDTO);
 	}
 	
 	@GetMapping("/{id}")
