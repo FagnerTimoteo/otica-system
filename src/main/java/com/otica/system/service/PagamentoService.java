@@ -6,10 +6,8 @@ import com.otica.system.model.StatusPagamento;
 import com.otica.system.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.otica.system.model.Pagamento;
 import com.otica.system.repository.PagamentoRepository;
-
 import java.time.LocalDateTime;
 
 @Service
@@ -25,7 +23,7 @@ public class PagamentoService {
 		Pagamento pagamento = new Pagamento();
 
 		Pedido pedido = pedidoRepository.findById(dto.getPedidoId()).orElseThrow(
-				() -> new RuntimeException("Pedido não encontrado"));
+			() -> new RuntimeException("Pedido não encontrado"));
 
 		pagamento.setPedido(pedido);
 		pagamento.setTipo(dto.getTipo());
@@ -38,7 +36,7 @@ public class PagamentoService {
 	
 	public Pagamento findById(Long id) {
 		return pagamentoRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
+			.orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
 	}
 	
 	public void deleteById(Long id) {

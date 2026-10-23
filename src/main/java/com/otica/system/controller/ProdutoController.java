@@ -1,5 +1,7 @@
 package com.otica.system.controller;
 
+import com.otica.system.DTO.request.ProdutoRequestDTO;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +25,8 @@ public class ProdutoController {
 	}
 	
 	@PostMapping
-	public Produto save(@RequestBody Produto produto) {
-		return service.save(produto);
+	public Produto save(@Valid @RequestBody ProdutoRequestDTO requestDTO) {
+		return service.save(requestDTO);
 	}
 	
 	@GetMapping("/{id}")
@@ -33,8 +35,10 @@ public class ProdutoController {
 	}
 	
 	@PutMapping("/{id}")
-	public Produto updateById(@PathVariable Long id, @RequestBody Produto produto) {
-		return service.updateById(id, produto);
+	public Produto updateById(
+			@PathVariable Long id,
+			@Valid @RequestBody ProdutoRequestDTO requestDTO) {
+		return service.updateById(id, requestDTO);
 	}
 	
 	@DeleteMapping("/{id}")

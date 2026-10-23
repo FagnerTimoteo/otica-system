@@ -2,6 +2,7 @@ package com.otica.system.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class Fornecedor {
 	private String nome;
 	private String telefone;
 	private String email;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "fornecedor")
 	private List<Produto> produtos;
 }

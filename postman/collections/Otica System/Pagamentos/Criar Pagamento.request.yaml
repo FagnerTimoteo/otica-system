@@ -1,5 +1,4 @@
 $kind: http-request
-name: Criar Pagamento
 method: POST
 url: "{{baseUrl}}/pagamentos"
 headers:
@@ -8,10 +7,9 @@ body:
   type: json
   content: |-
     {
+      "pedidoId": 1,
       "tipo": "CARTAO",
-      "valor": 599.90,
-      "dataPagamento": "2024-01-15",
-      "status": "PAGO"
+      "valor": 599.90
     }
 scripts:
   - type: afterResponse
