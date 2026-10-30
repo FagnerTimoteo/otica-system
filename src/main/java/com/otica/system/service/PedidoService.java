@@ -3,7 +3,6 @@ package com.otica.system.service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.datatype.jdk8.WrappedIOException;
 import com.otica.system.model.*;
 import com.otica.system.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
