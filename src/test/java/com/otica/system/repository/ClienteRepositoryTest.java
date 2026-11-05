@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
 
 @DataJpaTest(properties = {
         "spring.flyway.enabled=false"
@@ -34,11 +32,15 @@ class ClienteRepositoryTest {
         cliente.setEmail("joao@email.com");
         cliente.setDataCadastro(LocalDateTime.now());
 
+        LocalDateTime inicio = LocalDateTime.now();
+
         // Act
         Cliente clienteSalvo = clienteRepository.save(cliente);
 
         Optional<Cliente> resultado =
                 clienteRepository.findById(clienteSalvo.getId());
+
+        LocalDateTime fim = LocalDateTime.now();
 
         // Assert
         assertThat(clienteSalvo.getId()).isNotNull();
@@ -47,10 +49,7 @@ class ClienteRepositoryTest {
         assertThat(resultado.get().getTelefone()).isEqualTo("87999999999");
         assertThat(resultado.get().getCpf()).isEqualTo("12345678900");
         assertThat(resultado.get().getEmail()).isEqualTo("joao@email.com");
-
-        assertThat(resultado.get().getDataCadastro())
-                .isCloseTo(LocalDateTime.now(), within(1, ChronoUnit.SECONDS));
-
+        assertThat(resultado.get().getDataCadastro()).isBetween(inicio, fim);
         assertThat(resultado.get().getReceitas()).isNull();
     }
 }
