@@ -1,10 +1,8 @@
 $kind: http-request
-name: Criar Produto
 method: POST
-url: '{{baseUrl}}/produtos'
+url: "{{baseUrl}}/produtos"
 headers:
-  - key: Content-Type
-    value: application/json
+  Content-Type: application/json
 body:
   type: json
   content: |-
@@ -12,11 +10,11 @@ body:
       "nome": "Armação Ray-Ban",
       "preco": 299.90,
       "quantidadeEstoque": 10,
-      "tipo": "ARMACAO"
+      "tipo": "ARMACAO",
+      "fornecedorId": 1
     }
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       pm.test("Status 200 OK", function () {
         pm.response.to.have.status(200);
@@ -53,3 +51,4 @@ scripts:
       if (json && json.id) {
         pm.collectionVariables.set("produtoId", json.id);
       }
+    language: text/javascript
