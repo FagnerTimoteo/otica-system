@@ -140,7 +140,6 @@ class ClienteServiceTest {
         clienteAtualizado.setCpf("12345678900");
         clienteAtualizado.setTelefone("87999999999");
         clienteAtualizado.setEmail("joao.silva@email.com");
-        clienteAtualizado.setDataCadastro(LocalDateTime.now());
 
         when(repository.findById(id))
                 .thenReturn(Optional.of(clienteExistente));
@@ -158,7 +157,7 @@ class ClienteServiceTest {
         assertThat(resultado.getTelefone()).isEqualTo("87999999999");
         assertThat(resultado.getEmail()).isEqualTo("joao.silva@email.com");
         assertThat(resultado.getDataCadastro())
-                .isEqualTo(clienteAtualizado.getDataCadastro());
+                .isEqualTo(clienteExistente.getDataCadastro());
 
         verify(repository, times(1)).findById(id);
         verify(repository, times(1)).save(any(Cliente.class));

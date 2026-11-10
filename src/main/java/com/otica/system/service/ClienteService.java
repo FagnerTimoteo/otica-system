@@ -41,10 +41,7 @@ public class ClienteService {
 			clienteExistente.setNome(cliente.getNome());	
 			clienteExistente.setCpf(cliente.getCpf());
 			clienteExistente.setTelefone(cliente.getTelefone());
-			//clienteExistente.setPedidos(null);
-			//clienteExistente.setReceitas(null);
 			clienteExistente.setEmail(cliente.getEmail());
-			clienteExistente.setDataCadastro(cliente.getDataCadastro());
 			
 			return repository.save(clienteExistente);
 		}).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
