@@ -1,6 +1,7 @@
 package com.otica.system.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -35,5 +36,5 @@ public class Produto {
     private Fornecedor fornecedor;
 
     @OneToMany(mappedBy = "produto")
-    private List<ItemPedido> itens;
+    private List<ItemPedido> itens = new ArrayList<>();
 }
