@@ -42,17 +42,19 @@ public class ProdutoService {
 	}
 
 	public Produto updateById(Long id, ProdutoRequestDTO dto) {
-		Fornecedor fornecedor = fornecedorRepository.findById(dto.getFornecedorId())
-			.orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
 
-		return produtoRepository.findById(id).map(produtoExistente -> {
-			produtoExistente.setNome(dto.getNome());
-			produtoExistente.setPreco(dto.getPreco());
-			produtoExistente.setQuantidadeEstoque(dto.getQuantidadeEstoque());
-			produtoExistente.setTipo(dto.getTipo());
-			produtoExistente.setFornecedor(fornecedor);
-			
-			return produtoRepository.save(produtoExistente);
-		}).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+		Produto produtoExistente = produtoRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+		Fornecedor fornecedor = fornecedorRepository.findById(dto.getFornecedorId())
+				.orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
+
+		produtoExistente.setNome(dto.getNome());
+		produtoExistente.setPreco(dto.getPreco());
+		produtoExistente.setQuantidadeEstoque(dto.getQuantidadeEstoque());
+		produtoExistente.setTipo(dto.getTipo());
+		produtoExistente.setFornecedor(fornecedor);
+
+		return produtoRepository.save(produtoExistente);
 	}
 }
